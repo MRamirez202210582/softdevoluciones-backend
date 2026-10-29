@@ -1,3 +1,4 @@
+
 package com.softdevoluciones.backend.identity.infrastructure.security;
 
 import org.springframework.context.annotation.Bean;
@@ -16,25 +17,29 @@ public class CorsConfig {
 
         CorsConfiguration configuration = new CorsConfiguration();
 
-        // Frontend Angular
-        configuration.setAllowedOrigins(
-                List.of("http://localhost:4200")
-        );
+        // Frontend Angular local y desplegado en Vercel
+        configuration.setAllowedOrigins(List.of(
+                "http://localhost:4200",
+                "https://softdevoluciones-frontend.vercel.app"
+        ));
 
         // Métodos HTTP permitidos
-        configuration.setAllowedMethods(
-                List.of(
-                        "GET",
-                        "POST",
-                        "PUT",
-                        "PATCH",
-                        "DELETE",
-                        "OPTIONS"
-                )
-        );
+        configuration.setAllowedMethods(List.of(
+                "GET",
+                "POST",
+                "PUT",
+                "PATCH",
+                "DELETE",
+                "OPTIONS"
+        ));
 
         // Encabezados permitidos
         configuration.setAllowedHeaders(List.of("*"));
+
+        // Encabezados expuestos al frontend
+        configuration.setExposedHeaders(List.of(
+                "Authorization"
+        ));
 
         // Permitir credenciales cuando sean necesarias
         configuration.setAllowCredentials(true);
